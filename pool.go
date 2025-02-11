@@ -23,11 +23,11 @@ func NewPool(numThreads int) *Pool {
 
 func (pool *Pool) Run() {
 	for i := 0; i < pool.numThreads; i++ {
-		go pool.runWorker()
+		go pool.worker()
 	}
 }
 
-func (pool *Pool) runWorker() {
+func (pool *Pool) worker() {
 	for task := range pool.tasksChan {
 		task.Run(&pool.wg)
 	}
